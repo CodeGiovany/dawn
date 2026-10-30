@@ -1,0 +1,66 @@
+{%- comment -%}
+  Banner principal de LYOG: fondo negro, titular grande y boton naranja.
+  Uso: Personalizar > Agregar seccion > "LYOG - Banner".
+{%- endcomment -%}
+<section class="lyog-banner" style="background-color: {{ section.settings.fondo }};">
+  {%- if section.settings.imagen != blank -%}
+    <div class="lyog-banner__imagen">
+      {{ section.settings.imagen | image_url: width: 2000 | image_tag: loading: 'eager', alt: section.settings.titulo }}
+    </div>
+  {%- endif -%}
+  <div class="lyog-banner__contenido page-width">
+    <h1 class="lyog-banner__titulo">{{ section.settings.titulo }}</h1>
+    {%- if section.settings.subtitulo != blank -%}
+      <p class="lyog-banner__subtitulo">{{ section.settings.subtitulo }}</p>
+    {%- endif -%}
+    {%- if section.settings.boton_texto != blank -%}
+      <a class="button" href="{{ section.settings.boton_enlace | default: routes.all_products_collection_url }}">
+        {{ section.settings.boton_texto }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+<style>
+  .lyog-banner { position: relative; overflow: hidden; }
+  .lyog-banner__imagen { position: absolute; inset: 0; opacity: .45; }
+  .lyog-banner__imagen img { width: 100%; height: 100%; object-fit: cover; }
+  .lyog-banner__contenido {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
+    padding-top: {{ section.settings.espacio }}px;
+    padding-bottom: {{ section.settings.espacio }}px;
+  }
+  .lyog-banner__titulo {
+    margin: 0;
+    font-size: clamp(3.6rem, 9vw, 9rem);
+    line-height: 0.95;
+    color: #fff;
+  }
+  .lyog-banner__subtitulo {
+    margin: 0;
+    font-size: 1.6rem;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "LYOG - Banner",
+  "settings": [
+    { "type": "text", "id": "titulo", "label": "Titulo", "default": "Kuska - Usuchkan" },
+    { "type": "text", "id": "subtitulo", "label": "Subtitulo", "default": "Polos y poleras oversize" },
+    { "type": "text", "id": "boton_texto", "label": "Texto del boton", "default": "Ver coleccion" },
+    { "type": "url", "id": "boton_enlace", "label": "Enlace del boton" },
+    { "type": "image_picker", "id": "imagen", "label": "Imagen de fondo (opcional)" },
+    { "type": "color", "id": "fondo", "label": "Color de fondo", "default": "#000000" },
+    { "type": "range", "id": "espacio", "label": "Espacio vertical (px)", "min": 40, "max": 200, "step": 10, "default": 110 }
+  ],
+  "presets": [{ "name": "LYOG - Banner" }]
+}
+{% endschema %}
