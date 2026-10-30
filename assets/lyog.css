@@ -1,22 +1,31 @@
 /* ==========================================================
-   LYOG · Kuska - Usuchkan  |  Capa de marca para Shopify
+   LYOG · Kuska - Usuchkan  |  Capa de marca v2 (minimalista)
    Pensada para el tema Dawn (y derivados como Whisper).
-   Paleta oficial tomada del Brand Book.
+   Casi todo en negro, blanco y gris; el naranja solo en el
+   boton principal; el patron andino solo como franja fina.
    ========================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Unbounded:wght@400;600&display=swap");
 
 :root {
   --lyog-negro: #000000;
   --lyog-blanco: #ffffff;
+  --lyog-gris: #bbbbbb;
+  --lyog-linea: #262626;
   --lyog-naranja: #f25822;
-  --lyog-celeste: #1590ba;
-  --lyog-rojo: #c31517;
-  --lyog-guinda: #a20a1f;
-  --lyog-vino: #6a121e;
-  --lyog-magenta: #96239c;
-  --lyog-oliva: #5e5f37;
 }
 
-/* Esquema de colores global (variables que usa Dawn, en formato "r,g,b") */
+/* Tipografias: Unbounded (titulos y logo) + DM Sans (textos) */
+:root {
+  --font-heading-family: "Unbounded", sans-serif;
+  --font-heading-weight: 600;
+  --font-heading-style: normal;
+  --font-body-family: "DM Sans", sans-serif;
+  --font-body-weight: 400;
+  --font-body-style: normal;
+}
+
+/* Esquema de colores global (variables de Dawn, formato "r,g,b") */
 :root,
 [class*="color-scheme-"],
 .gradient {
@@ -26,93 +35,100 @@
   --color-button-text: 0, 0, 0;
   --color-secondary-button: 0, 0, 0;
   --color-secondary-button-text: 255, 255, 255;
-  --color-link: 21, 144, 186;
-  --color-badge-foreground: 255, 255, 255;
-  --color-badge-background: 150, 35, 156;
-  --color-badge-border: 150, 35, 156;
+  --color-link: 255, 255, 255;
+  --color-badge-foreground: 0, 0, 0;
+  --color-badge-background: 255, 255, 255;
+  --color-badge-border: 255, 255, 255;
   --color-shadow: 0, 0, 0;
-  /* Variables de temas anteriores */
   --color-base-text: 255, 255, 255;
   --color-base-background-1: 0, 0, 0;
-  --color-base-background-2: 20, 20, 20;
+  --color-base-background-2: 21, 21, 21;
   --color-base-solid-button-labels: 0, 0, 0;
   --color-base-accent-1: 242, 88, 34;
-  --color-base-accent-2: 21, 144, 186;
+  --color-base-accent-2: 187, 187, 187;
 }
 
 body {
   background: var(--lyog-negro);
   color: var(--lyog-blanco);
+  font-family: var(--font-body-family);
 }
 
-/* Titulos: peso fuerte, mayusculas y aire entre letras (como el logotipo) */
-h1, h2, h3,
-.h0, .h1, .h2, .h3 {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+/* Titulos: Unbounded, con mayusculas y minusculas, sin gritar */
+h1, h2, h3, h4,
+.h0, .h1, .h2, .h3, .h4 {
+  font-family: var(--font-heading-family);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.15;
 }
+h1, .h0, .h1 { font-size: clamp(2.8rem, 5vw, 5.2rem); }
+h2, .h2 { font-size: clamp(2.2rem, 3vw, 2.6rem); }
 
-/* Botones: naranja de marca, sin bordes redondeados */
+/* Boton principal: unico toque de naranja. Sin bordes redondeados */
 .button,
 .shopify-challenge__button,
 button[type="submit"].button {
   --border-radius: 0;
   border-radius: 0;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
 .button:not(.button--secondary):hover {
-  background: var(--lyog-celeste);
-  color: var(--lyog-blanco);
+  background: var(--lyog-blanco);
+  color: var(--lyog-negro);
 }
 .button--secondary {
   border: 1px solid var(--lyog-blanco);
 }
 
 /* Enlaces */
-a:hover { color: var(--lyog-celeste); }
+a { text-decoration: none; }
+a:hover { color: var(--lyog-gris); }
 
-/* Precios en oferta y etiquetas */
+/* Precios y etiquetas */
 .price--on-sale .price-item--sale,
 .price-item--sale { color: var(--lyog-naranja); }
 .badge {
   border-radius: 0;
-  background: var(--lyog-magenta);
-  color: var(--lyog-blanco);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-/* Tarjetas de producto */
+/* Tarjetas de producto: sin bordes, sin sombras, fotos protagonistas */
 .card,
 .card__inner,
 .card__media,
-.media { border-radius: 0; }
-.card-wrapper:hover .card__heading { color: var(--lyog-naranja); }
+.media {
+  border-radius: 0;
+  box-shadow: none;
+}
+.card-wrapper:hover .card__heading { color: var(--lyog-gris); }
 
 /* Campos de formulario */
 .field__input,
 .select__select,
-.customer .field input {
-  border-radius: 0;
-}
+.customer .field input { border-radius: 0; }
 
-/* Encabezado: espacio libre alrededor del logo (regla del Brand Book) */
+/* Encabezado: aire alrededor del logo (regla del Brand Book) */
 .header__heading-logo-wrapper { padding: 1.5rem 0; }
-.header__heading-logo { max-width: 160px; height: auto; }
+.header__heading-logo { max-width: 140px; height: auto; }
+.header { border-bottom: 1px solid var(--lyog-linea); }
 
 /* Foco visible para teclado */
 :focus-visible {
-  outline: 2px solid var(--lyog-naranja);
+  outline: 2px solid var(--lyog-blanco);
   outline-offset: 3px;
 }
 
-/* Franja del patron andino sobre el pie de pagina */
-.footer::before {
+/* Pie de pagina: linea fina arriba y franja andina delgada */
+.footer { border-top: 1px solid var(--lyog-linea); }
+.footer::after {
   content: "";
   display: block;
-  height: 44px;
+  height: 24px;
   background: url("lyog-patron.svg") repeat-x center / auto 100%;
 }

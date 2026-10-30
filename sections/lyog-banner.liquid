@@ -1,11 +1,11 @@
 {%- comment -%}
-  Banner principal de LYOG: fondo negro, titular grande y boton naranja.
+  Banner principal de LYOG (v2 minimalista): imagen grande, texto abajo a la izquierda.
   Uso: Personalizar > Agregar seccion > "LYOG - Banner".
 {%- endcomment -%}
-<section class="lyog-banner" style="background-color: {{ section.settings.fondo }};">
+<section class="lyog-banner" style="background-color: {{ section.settings.fondo }}; min-height: {{ section.settings.alto }}px;">
   {%- if section.settings.imagen != blank -%}
     <div class="lyog-banner__imagen">
-      {{ section.settings.imagen | image_url: width: 2000 | image_tag: loading: 'eager', alt: section.settings.titulo }}
+      {{ section.settings.imagen | image_url: width: 2400 | image_tag: loading: 'eager', alt: section.settings.titulo }}
     </div>
   {%- endif -%}
   <div class="lyog-banner__contenido page-width">
@@ -22,30 +22,25 @@
 </section>
 
 <style>
-  .lyog-banner { position: relative; overflow: hidden; }
-  .lyog-banner__imagen { position: absolute; inset: 0; opacity: .45; }
+  .lyog-banner {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+  .lyog-banner__imagen { position: absolute; inset: 0; }
   .lyog-banner__imagen img { width: 100%; height: 100%; object-fit: cover; }
   .lyog-banner__contenido {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.6rem;
-    padding-top: {{ section.settings.espacio }}px;
-    padding-bottom: {{ section.settings.espacio }}px;
+    width: 100%;
+    padding-top: 4rem;
+    padding-bottom: 6.4rem;
   }
-  .lyog-banner__titulo {
-    margin: 0;
-    font-size: clamp(3.6rem, 9vw, 9rem);
-    line-height: 0.95;
-    color: #fff;
-  }
+  .lyog-banner__titulo { margin: 0; color: #fff; }
   .lyog-banner__subtitulo {
-    margin: 0;
-    font-size: 1.6rem;
-    letter-spacing: .3em;
-    text-transform: uppercase;
-    color: #fff;
+    margin: 1.6rem 0 3.2rem;
+    font-size: 1.8rem;
+    color: #ddd;
   }
 </style>
 
@@ -54,12 +49,12 @@
   "name": "LYOG - Banner",
   "settings": [
     { "type": "text", "id": "titulo", "label": "Titulo", "default": "Kuska - Usuchkan" },
-    { "type": "text", "id": "subtitulo", "label": "Subtitulo", "default": "Polos y poleras oversize" },
+    { "type": "text", "id": "subtitulo", "label": "Subtitulo", "default": "Polos y poleras oversize." },
     { "type": "text", "id": "boton_texto", "label": "Texto del boton", "default": "Ver coleccion" },
     { "type": "url", "id": "boton_enlace", "label": "Enlace del boton" },
-    { "type": "image_picker", "id": "imagen", "label": "Imagen de fondo (opcional)" },
-    { "type": "color", "id": "fondo", "label": "Color de fondo", "default": "#000000" },
-    { "type": "range", "id": "espacio", "label": "Espacio vertical (px)", "min": 40, "max": 200, "step": 10, "default": 110 }
+    { "type": "image_picker", "id": "imagen", "label": "Imagen de fondo" },
+    { "type": "color", "id": "fondo", "label": "Color de fondo", "default": "#151515" },
+    { "type": "range", "id": "alto", "label": "Alto minimo (px)", "min": 320, "max": 800, "step": 20, "default": 560 }
   ],
   "presets": [{ "name": "LYOG - Banner" }]
 }
